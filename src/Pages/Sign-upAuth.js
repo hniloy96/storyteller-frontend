@@ -22,7 +22,7 @@ function Auth() {
             }
     
             const newUser = await fetch(
-                "https://serenomusic.herokuapp.com/user/register",
+                "http://localhost:4000/user/register",
                 configs
             )
     
