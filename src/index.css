@@ -11,3 +11,163 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.Big-post {
+  color: white;
+  background-color: #A0C3D2;
+  width: 500px;
+  height: auto;
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 100px;
+  border-radius: 25px;
+
+}
+.update-delete{
+  border: 2px solid #A0C3D2;
+  width: 400px;
+  display: flex;
+  justify-content: space-between;
+  
+}
+
+.update-button {
+  border: 2px solid white;
+  width: 60px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.delete-button {
+  border: 2px solid white;
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.comment-section {
+  border: 2px solid #A0C3D2;
+  width: 400px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.write-comment {
+  border: 2px solid white;
+  width: 350px;
+  height: 30px;
+  border-radius: 5px;
+}
+
+.submit-comment {
+  border: 2px solid white;
+  width: 150px;
+  height: 35px;
+  border-radius: 5px;
+}
+
+.album-top {
+  border: 2px solid #404258;
+  width: 800px;
+  height: 250px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 200px;
+  justify-content: space-around;
+  background-color: #404258;
+  border-radius: 20px;
+  
+}
+
+.cover {
+  width: 250px;
+  height: auto;
+  margin-top:
+
+}
+
+.title-artist {
+  width: 250px;
+  border: 0.5px solid #404258;
+  height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: -200px;
+  color: white;
+}
+
+.title-name {
+  margin-top: 70px;
+}
+
+.album-bot {
+  text-align: left;
+  margin-top: 10px;
+  background-color: #404258;
+  border: 1px solid #404258;
+  border-radius: 25px;
+}
+
+.tracks-name{
+  margin-left: 130px;
+  color: white;
+}
+
+.album-comment-section {
+  text-align: left;
+  margin-top: 10px;
+  background-color: #404258;
+  border: 1px solid #404258;
+  border-radius: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.compose-album-comment {
+  margin-top: 20px;
+}
+
+.album-comments {
+  border: 2px solid white;
+  width: 400px;
+  height: 40px;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+}
+
+.log-out {
+  width: 100px;
+  height: 40px;
+  border-radius: 10px;
+}
+
+.loading{
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 60px;
+}
+
+.spinner {
+width: 24px;
+animation: loading infinite 3s linear;
+}
+
+@keyframes loading{
+from{
+  transform: rotateZ(0deg);
+}
+to{
+  transform: rotateZ(360deg);
+}
+}

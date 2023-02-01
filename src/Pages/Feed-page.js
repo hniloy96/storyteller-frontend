@@ -121,10 +121,6 @@ const Feed = (props) => {
                 </div>
                 {posts && posts.length ? loaded() : loading()}
             </div>
-
-            <div className="nav-bar">
-                <Nav />
-            </div>
         </div>
 
     )
