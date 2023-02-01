@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Nav from './Components/Nav';
 import LOGIN from './Pages/Log-inAuth'
 import SIGNUP from './Pages/Sign-upAuth'
+import Feed from './Pages/Feed-page';
 
 import { UserContext } from './data';
 import { useState } from 'react'
@@ -24,6 +25,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LOGIN />} />
           <Route path='/signup' element={ < SIGNUP />} />
+          <Route path='/feed' element={ < Feed />} />
         </Routes>
       </UserInfo>
     </div>
