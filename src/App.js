@@ -5,6 +5,7 @@ import LOGIN from './Pages/Log-inAuth'
 import SIGNUP from './Pages/Sign-upAuth'
 import Feed from './Pages/Feed-page';
 import Detailpost from './Pages/Post-detail'
+import Updatepost from './Pages/Post-update'
 
 import { UserContext } from './data';
 import { useState } from 'react'
@@ -28,6 +29,7 @@ function App() {
           <Route path='/signup' element={ < SIGNUP />} />
           <Route path='/feed' element={ < Feed />} />
           <Route path='/post/:id' element={ < Detailpost />} />
+          <Route path='/post-update/:id' element={ < Updatepost />} />
         </Routes>
       </UserInfo>
     </div>
