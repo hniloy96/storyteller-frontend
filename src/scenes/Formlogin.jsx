@@ -17,12 +17,12 @@ import Dropzone from "react-dropzone";
 import FlexBetween from "../Components/FlexBetween";
 
 const registerSchema = yup.object().shape({
-  firstName: yup.string().required("required"),
-  lastName: yup.string().required("required"),
+  firstname: yup.string().required("required"),
+  lastname: yup.string().required("required"),
   email: yup.string().email("invalid email").required("required"),
   username: yup.string().required("required"),
   password: yup.string().required("required"),
-  
+
 });
 
 const loginSchema = yup.object().shape({
@@ -31,12 +31,12 @@ const loginSchema = yup.object().shape({
 });
 
 const initialValuesRegister = {
-  firstName: "",
-  lastName: "",
+  firstname: "",
+  lastname: "",
   email: "",
   username: "",
   password: "",
-  
+
 };
 
 const initialValuesLogin = {
@@ -59,22 +59,33 @@ const Form = () => {
     for (let value in values) {
       formData.append(value, values[value]);
     }
-    formData.append("picturePath", values.picture.name);
 
+
+
+    const configs = {
+      method: "POST",
+      body: JSON.stringify(values),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }
     const savedUserResponse = await fetch(
       "http://localhost:4000/user/register",
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
-    const savedUser = await savedUserResponse.json();
+      configs
+    )
+    const savedUser = await savedUserResponse.json()
     onSubmitProps.resetForm();
 
     if (savedUser) {
-      setPageType("login");
+      dispatch(
+        setLogin({
+          user: savedUser.user,
+          token: savedUser.token,
+        })
+      )
+      navigate("/home");
     }
-  };
+  }
 
   const login = async (values, onSubmitProps) => {
     const loggedInResponse = await fetch("http://localhost:4000/user/login", {
@@ -131,38 +142,48 @@ const Form = () => {
                   label="First Name"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.firstName}
-                  name="firstName"
+                  value={values.firstname}
+                  name="firstname"
                   error={
-                    Boolean(touched.firstName) && Boolean(errors.firstName)
+                    Boolean(touched.firstname) && Boolean(errors.firstname)
                   }
-                  helperText={touched.firstName && errors.firstName}
+                  helperText={touched.firstname && errors.firstname}
                   sx={{ gridColumn: "span 2" }}
                 />
                 <TextField
                   label="Last Name"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.lastName}
-                  name="lastName"
-                  error={Boolean(touched.lastName) && Boolean(errors.lastName)}
-                  helperText={touched.lastName && errors.lastName}
+                  value={values.lastname}
+                  name="lastname"
+                  error={Boolean(touched.lastname) && Boolean(errors.lastname)}
+                  helperText={touched.lastname && errors.lastname}
                   sx={{ gridColumn: "span 2" }}
+                />
+                <TextField
+                  label="Email"
+                  onBlur={handleBlur}
+                  onChange={handleChange}
+                  value={values.email}
+                  name="email"
+                  error={Boolean(touched.lastname) && Boolean(errors.lastname)}
+                  helperText={touched.lastname && errors.lastname}
+                  sx={{ gridColumn: "span 4" }}
                 />
               </>
             )}
             <TextField
-                  label="User-name"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.username}
-                  name="username"
-                  error={
-                    Boolean(touched.username) && Boolean(errors.username)
-                  }
-                  helperText={touched.username && errors.username}
-                  sx={{ gridColumn: "span 4" }}
-                />
+              label="User-name"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              value={values.username}
+              name="username"
+              error={
+                Boolean(touched.username) && Boolean(errors.username)
+              }
+              helperText={touched.username && errors.username}
+              sx={{ gridColumn: "span 2" }}
+            />
             <TextField
               label="Password"
               type="password"
@@ -172,7 +193,7 @@ const Form = () => {
               name="password"
               error={Boolean(touched.password) && Boolean(errors.password)}
               helperText={touched.password && errors.password}
-              sx={{ gridColumn: "span 4" }}
+              sx={{ gridColumn: "span 2" }}
             />
           </Box>
 
