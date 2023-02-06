@@ -27,7 +27,10 @@ import { setPosts } from "state";
 
 const MyPostWidget = () => {
   const dispatch = useDispatch();
-  const [post, setPost] = useState("");
+  const [post, setPost] = useState({
+    title: "",
+    body: "",
+  });
   const { palette } = useTheme();
   const { _id } = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
@@ -37,30 +40,30 @@ const MyPostWidget = () => {
 
   const handlePost = async () => {
     const formData = new FormData();
-    formData.append("userId", _id);
-    formData.append("description", post);
-    if (image) {
-      formData.append("picture", image);
-      formData.append("picturePath", image.name);
-    }
+    formData.append("title", post);
+    formData.append("body", post);
+    
 
-    const response = await fetch(`http://localhost:3001/posts`, {
+    const response = await fetch(`http://localhost:4000/posts`, {
       method: "POST",
-      headers: { Authorization: `Bearer ${token}` },
-      body: formData,
+      headers: { 
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}` },
+      body: JSON.stringify(currentState)
     });
     const posts = await response.json();
     dispatch(setPosts({ posts }));
-    setImage(null);
-    setPost("");
+    setPost({
+      title: "",
+      body: ""
+    })
   };
 
   return (
     <WidgetWrapper>
       <FlexBetween gap="1.5rem">
-        <UserImage image={picturePath} />
         <InputBase
-          placeholder="What's on your mind..."
+          placeholder="Let your pen do the talking..."
           onChange={(e) => setPost(e.target.value)}
           value={post}
           sx={{
@@ -71,50 +74,6 @@ const MyPostWidget = () => {
           }}
         />
       </FlexBetween>
-      {isImage && (
-        <Box
-          border={`1px solid ${medium}`}
-          borderRadius="5px"
-          mt="1rem"
-          p="1rem"
-        >
-          <Dropzone
-            acceptedFiles=".jpg,.jpeg,.png"
-            multiple={false}
-            onDrop={(acceptedFiles) => setImage(acceptedFiles[0])}
-          >
-            {({ getRootProps, getInputProps }) => (
-              <FlexBetween>
-                <Box
-                  {...getRootProps()}
-                  border={`2px dashed ${palette.primary.main}`}
-                  p="1rem"
-                  width="100%"
-                  sx={{ "&:hover": { cursor: "pointer" } }}
-                >
-                  <input {...getInputProps()} />
-                  {!image ? (
-                    <p>Add Image Here</p>
-                  ) : (
-                    <FlexBetween>
-                      <Typography>{image.name}</Typography>
-                      <EditOutlined />
-                    </FlexBetween>
-                  )}
-                </Box>
-                {image && (
-                  <IconButton
-                    onClick={() => setImage(null)}
-                    sx={{ width: "15%" }}
-                  >
-                    <DeleteOutlined />
-                  </IconButton>
-                )}
-              </FlexBetween>
-            )}
-          </Dropzone>
-        </Box>
-      )}
 
       <Divider sx={{ margin: "1.25rem 0" }} />
 
