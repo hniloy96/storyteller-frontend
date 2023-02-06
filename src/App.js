@@ -1,37 +1,29 @@
-import './App.css';
-import { Routes, Route } from 'react-router-dom';
-import Nav from './Components/Nav';
-import LOGIN from './Pages/Log-inAuth'
-import SIGNUP from './Pages/Sign-upAuth'
-import Feed from './Pages/Feed-page';
-import Detailpost from './Pages/Post-detail'
-import Updatepost from './Pages/Post-update'
 
-import { UserContext } from './data';
-import { useState } from 'react'
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { CssBaseline, ThemeProvider } from '@mui/material'
+import { themeSettings } from './theme';
+import { createTheme } from "@mui/material/styles";
+import HomePage from './scenes/homePage';
+import LoginPage from './scenes/LoginPage';
 
 function App() {
-  const { Provider: UserInfo } = UserContext
+  const mode = useSelector((state) => state.mode)
+  const theme = useMemo(() => createTheme(themeSettings(mode)), [mode]);
+  const isAuth = Boolean(useSelector((state) => state.token));
 
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [currentUser, setCurrentUser] = useState(null)
   return (
     <div className="App">
-      <UserInfo value={{
-        isAuthenticated,
-        currentUser,
-        setAuth: setIsAuthenticated,
-        setUser: setCurrentUser
-      }}>
-        <Nav />
+      <ThemeProvider theme={theme} >
+        <CssBaseline />
         <Routes>
-          <Route path="/" element={<LOGIN />} />
-          <Route path='/signup' element={ < SIGNUP />} />
-          <Route path='/feed' element={ < Feed />} />
-          <Route path='/post/:id' element={ < Detailpost />} />
-          <Route path='/post-update/:id' element={ < Updatepost />} />
+
+          <Route path='/' element={< LoginPage />} />
+          <Route path='/home' element={isAuth ? < HomePage /> : <Navigate to="/" />} />
+
         </Routes>
-      </UserInfo>
+      </ThemeProvider>
     </div>
   );
 }

@@ -32,6 +32,7 @@ function Auth() {
                 setUserToken(currentUser.token)
                 setUser(currentUser.user)
                 setAuth(currentUser.isLoggedIn)
+                
     
                 return currentUser
             } else {

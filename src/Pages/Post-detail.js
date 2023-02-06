@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react"
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { getUserToken } from "../utilities/authToken"
+import { useSelector }  from "react-redux"
 
 const Show = (props) => {
 
     const { id } = useParams()
     const token = getUserToken()
+    const token2 = useSelector((state) => state.token)
     const [post, setPost] = useState(null)
     const [comments, setComments] = useState(null)
+    const isLiked = Boolean()
     const [loading, setLoading] = useState(true)
     const [newForm, setNewForm] = useState({
         comments: "",
@@ -19,6 +22,9 @@ const Show = (props) => {
     const URL = `http://localhost:4000/posts/${id}`
     const POST_URL = "http://localhost:4000/interactions/"
 
+    console.log(`Here is the token = ${token}`)
+    console.log(token2)
+    
 
     const getPost = async () => {
         try {
@@ -52,6 +58,7 @@ const Show = (props) => {
                     </button>
                 </div>
                 <h2>{post.body}</h2>
+                <button>Like</button>
                 <form className="comment-section" onSubmit={handleSubmitComment}>
                     <input 
                         className="write-comment"
@@ -113,6 +120,7 @@ const Show = (props) => {
             console.log(err)
         }
     }
+    
 
     const handleChange = (e) => {
         const userInput = { ...newForm }

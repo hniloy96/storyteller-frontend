@@ -20,9 +20,6 @@ const Nav = (props) => {
             <Link to="/feed">
                 <h1 className="list-items">Story Teller</h1>
             </Link>
-            <Link to="/home">
-                <div className="list-items">Home</div>
-            </Link>
             <Link to="/feed">
                 <div className="list-items">Feed</div>
             </Link>
