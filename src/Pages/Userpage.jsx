@@ -2,7 +2,8 @@ import { Box, useMediaQuery } from "@mui/material";
 import { useSelector } from "react-redux";
 import Navbar from "../Sections/Navbar";
 import UserWidget from "../Sections/UserWidget";
-import FeedPage from "../Sections/Feed-page"
+import UserPosts from "../Sections/UserPosts"
+import { useParams } from "react-router";
 import CurrentUser from "../Sections/Currentuser"
 
 
@@ -10,6 +11,7 @@ import CurrentUser from "../Sections/Currentuser"
 const HomePage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
   const { _id } = useSelector((state) => state.user);
+  const { id } = useParams()
   console.log(`the id is ${_id}`)
   
   return (
@@ -29,10 +31,12 @@ const HomePage = () => {
           flexBasis={isNonMobileScreens ? "42%" : undefined}
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
-        <FeedPage />
+        <UserWidget userId={id}/>
+        <UserPosts />
         </Box>
         {isNonMobileScreens && (
           <Box flexBasis="26%">
+    
           </Box>
         )}
       </Box>

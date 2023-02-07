@@ -2,7 +2,8 @@ import { Box, useMediaQuery } from "@mui/material";
 import { useSelector } from "react-redux";
 import Navbar from "../Sections/Navbar";
 import UserWidget from "../Sections/UserWidget";
-import FeedPage from "../Sections/Feed-page"
+import Detailpost from "../Sections/Post-detail"
+import Updatepost from "../Sections/Post-update"
 import CurrentUser from "../Sections/Currentuser"
 
 
@@ -23,16 +24,17 @@ const HomePage = () => {
         justifyContent="space-between"
       >
         <Box flexBasis={isNonMobileScreens ? "26%" : undefined}>
-          <CurrentUser />
+        <CurrentUser />
         </Box>
         <Box
           flexBasis={isNonMobileScreens ? "42%" : undefined}
           mt={isNonMobileScreens ? undefined : "2rem"}
         >
-        <FeedPage />
+        <Updatepost />
         </Box>
         {isNonMobileScreens && (
           <Box flexBasis="26%">
+    
           </Box>
         )}
       </Box>

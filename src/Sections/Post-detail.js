@@ -1,30 +1,49 @@
+import {
+    ChatBubbleOutlineOutlined,
+    FavoriteBorderOutlined,
+    FavoriteOutlined,
+    ShareOutlined,
+  } from "@mui/icons-material";
+import { Box, Typography, Divider, useMediaQuery, useTheme, TextField, Button, IconButton } from "@mui/material";
 import { useState, useEffect } from "react"
 import { useParams, Link, useNavigate } from 'react-router-dom'
 import { getUserToken } from "../utilities/authToken"
-import { useSelector }  from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import WidgetWrapper from "../Components/WidgetWrapper";
 
-const Show = (props) => {
 
+const Show = () => {
+
+    const { palette } = useTheme();
+    const isNonMobile = useMediaQuery("(min-width:600px)");
+    const dark = palette.neutral.dark;
+    const medium = palette.neutral.medium;
+    const main = palette.neutral.main;
+    const primary = palette.primary.main;
     const { id } = useParams()
-    const token = getUserToken()
-    const token2 = useSelector((state) => state.token)
+    const dispatch = useDispatch();
+    const token = useSelector((state) => state.token)
+    const { _id, firstname, lastname } = useSelector((state) => state.user)
+    const loggedInUserId = useSelector((state) => state.user._id)
     const [post, setPost] = useState(null)
     const [comments, setComments] = useState(null)
     const isLiked = Boolean()
     const [loading, setLoading] = useState(true)
     const [newForm, setNewForm] = useState({
+        firstname: `${firstname}`,
+        lastname: `${lastname}`,
         comments: "",
-        post: `${id}`
+        post: `${id}`,
     })
-    
+
     // this page follows a smililar structure to album-detail page except an extra delete function and edit panel. 
     const navigate = useNavigate()
     const URL = `http://localhost:4000/posts/${id}`
     const POST_URL = "http://localhost:4000/interactions/"
 
     console.log(`Here is the token = ${token}`)
-    console.log(token2)
-    
+
+
 
     const getPost = async () => {
         try {
@@ -41,54 +60,131 @@ const Show = (props) => {
         }
     }
 
-
+    console.log(post)
 
     const loaded = () => (
         <>
-
-            <div className="Big-post">
-
+            <WidgetWrapper margin="10px">
                 <div className="update-delete">
-                    <Link className="update" to={`/post-update/${id}`}>
-                        <button className="update-button">Edit</button>
+                    <Link className="link" to={`/post-update/${id}`}>
+                        <Button
+                            value="Edit"
+                            type="submit"
+                            sx={{
+                                gridColumn: "span 4",
+                                backgroundColor: palette.primary.main,
+                                color: palette.background.alt,
+                                "&:hover": { color: palette.primary.main },
+                            }}
+                        >Edit
+                        </Button>
+
                     </Link>
-                    
-                    <button className="delete-button" onClick={removePost}>
-                        Delete post
-                    </button>
-                </div>
-                <h2>{post.body}</h2>
-                <button>Like</button>
-                <form className="comment-section" onSubmit={handleSubmitComment}>
-                    <input 
-                        className="write-comment"
-                        type="text"
-                        onChange={handleChange}
-                        placeholder='Type your comment'
-                        id="comments"
-                        name="comments"
-                        value={newForm.comments}
-                        required
-                    >
-
-                    </input>
-                    <button
-                        className="submit-comment"
+                    <Button
+                        onClick={removePost}
+                        value="Delete"
                         type="submit"
-                    >Comment</button>
-                </form>
-                <div>
-                    {comments?.map((comment) => {
-                        return (
-                            <h4>{comment.comments}</h4>
-                        )
-                    })}
+                        sx={{
+                            gridColumn: "span 4",
+                            backgroundColor: palette.primary.main,
+                            color: palette.background.alt,
+                            "&:hover": { color: palette.primary.main },
+                        }}
+                    >Delete
+                    </Button>
                 </div>
+                <Typography
+                    marginTop="20px"
+                    variant="h2"
+                    color={dark}
+                    fontWeight="500"
+                >
+                    {post.title}
+                </Typography>
+
+                <Typography
+                    
+                    marginBottom="20px"
+                    variant="h5"
+                    color={dark}
+                    fontWeight="250"
+                    sx={{
+                        "&:hover": {
+                            color: palette.primary.light,
+                            cursor: "pointer",
+                        },
+                    }}
+                >
+                    {post.firstname} {post.lastname}
+                </Typography>
+                <Divider />
+                <Typography
+                    marginTop="20px"
+                    marginBottom="20px"
+                    variant="h5"
+                    color={dark}
+                    fontWeight="500"
+                >
+                    {post.body}
+                </Typography>
+
+                <Box marginTop="20px">
+                <form className="comment-section" onSubmit={handleSubmitComment}>
+                <TextField
+                            type="text"
+                            onChange={handleChange}
+                            placeholder='Type your comment'
+                            id="comments"
+                            name="comments"
+                            value={newForm.comments}
+                            required
+                            
+                            sx={{ gridColumn: "span 3", width: "510px" }}
+                        />
+                    <Button
+                            value="Create Post"
+                            type="submit"
+                            sx={{
+                                p: "1rem",
+                                width: "130px",
+                                backgroundColor: palette.primary.main,
+                                color: palette.background.alt,
+                                "&:hover": { color: palette.primary.main },
+                            }}
+                        >Comment
+                        </Button>
+                </form>
+                </Box>
+                
+                
+            </WidgetWrapper>
+
+            <div>
+                {comments?.map((comment) => {
+                    return (
+                        <WidgetWrapper margin="10px">
+                            <Typography
+                   
+                    variant="h5"
+                    color={dark}
+                    fontWeight="250"
+                >
+                    {comment.firstname} {comment.lastname}
+                </Typography>
+                <Typography
+                   
+                    variant="h3"
+                    color={dark}
+                    fontWeight="500"
+                >
+                   {comment.comments}
+                </Typography>
+
+                        </WidgetWrapper>
+
+                    )
+                })}
             </div>
-
-
-
-
         </>
 
     )
@@ -105,22 +201,24 @@ const Show = (props) => {
                 },
                 body: JSON.stringify(currentState)
             }
-            
+
             const send = await fetch(POST_URL, requestOptions)
             const result = await send.json()
             setComments([...comments, result])
             setNewForm({
+                firstname: `${firstname}`,
+                lastname: `${lastname}`,
                 comments: "",
                 post: `${id}`
             })
-            
-            
+
+
 
         } catch (err) {
             console.log(err)
         }
     }
-    
+
 
     const handleChange = (e) => {
         const userInput = { ...newForm }
@@ -142,7 +240,7 @@ const Show = (props) => {
         } catch (err) {
             navigate(URL)
         } finally {
-            navigate('/feed')
+            navigate('/home')
         }
     }
 

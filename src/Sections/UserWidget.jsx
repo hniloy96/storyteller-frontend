@@ -1,8 +1,7 @@
 import {
   ManageAccountsOutlined,
-  EditOutlined,
-  LocationOnOutlined,
-  WorkOutlineOutlined,
+  AccountCircle,
+  ContactMail
 } from "@mui/icons-material";
 import { Box, Typography, Divider, useTheme } from "@mui/material";
 import FlexBetween from "../Components/FlexBetween";
@@ -10,6 +9,7 @@ import WidgetWrapper from "../Components/WidgetWrapper";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom"
 
 const UserWidget = ({ userId }) => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -41,33 +41,33 @@ const UserWidget = ({ userId }) => {
   }
 
   const {
+    id,
     firstname,
     lastname,
     email,
     friends,
   } = currentUser;
 
-  console.log(`first name is ${email}`)
+  console.log(`first name is ${id}`)
 
   return (
     <div>
-      <WidgetWrapper>
+      <WidgetWrapper margin="10px">
+        <FlexBetween gap="1rem">
+        <AccountCircle />
       <Typography
               variant="h4"
               color={dark}
               fontWeight="500"
-              sx={{
-                "&:hover": {
-                  color: palette.primary.light,
-                  cursor: "pointer",
-                },
-              }}
             >
               {firstname} {lastname}
         </Typography>
+        </FlexBetween>
+        
         <Typography color={medium}>{friends.length} friends</Typography>
-        <ManageAccountsOutlined />
         <Divider />
+        <FlexBetween marginTop="5px" gap="1rem">
+        <ContactMail />
         <Typography
               variant="h5"
               color={dark}
@@ -75,6 +75,8 @@ const UserWidget = ({ userId }) => {
             >
             Email: {email}
         </Typography>
+        </FlexBetween>
+        
 
 
       </WidgetWrapper>

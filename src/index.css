@@ -26,12 +26,18 @@ body,
 }
 
 .post-box {
-  
   width: 400px;
   height: 200px;
   margin: 10px;
-  
+}
 
+.update-delete {
+  display: flex;
+  justify-content: space-between;
+}
 
-  
+.cancel {
+  width: fit-content;
+  display: flex;
+  justify-content: end;
 }

@@ -3,6 +3,7 @@ import WidgetWrapper from "../Components/WidgetWrapper";
 import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom"
 
 const Feed = (props) => {
 
@@ -84,7 +85,6 @@ const Feed = (props) => {
                             <WidgetWrapper margin="10px">
 
                                 <Box>
-                                    <Link className="link" key={post.owner} to={`/user/${post.owner}`}>
                                     <Typography
                                         variant="h5"
                                         color={dark}
@@ -98,7 +98,6 @@ const Feed = (props) => {
                                     >
                                         {post.firstname} {post.lastname}
                                     </Typography>
-                                    </Link>
                                     <Typography
                                         variant="h2"
                                         color={dark}

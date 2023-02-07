@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { useSelector } from "react-redux";
 
-const Feed = (props) => {
+const Currentprofile = () => {
 
     const { palette } = useTheme();
     const isNonMobile = useMediaQuery("(min-width:600px)");
@@ -23,7 +23,8 @@ const Feed = (props) => {
         owner: `${_id}`
     })
     // api link
-    const BASE_URL = "http://localhost:4000/posts/"
+    const BASE_URL = `http://localhost:4000/user/posts/${_id}`
+    const Post_URL = "http://localhost:4000/posts"
     // getting all the posts
     const getPosts = async () => {
         try {
@@ -51,7 +52,7 @@ const Feed = (props) => {
                 },
                 body: JSON.stringify(currentState)
             }
-            const response = await fetch(BASE_URL, requestOptions)
+            const response = await fetch(Post_URL, requestOptions)
             const createdPost = await response.json()
             setPosts([...posts, createdPost])
             setNewForm({
@@ -84,21 +85,16 @@ const Feed = (props) => {
                             <WidgetWrapper margin="10px">
 
                                 <Box>
-                                    <Link className="link" key={post.owner} to={`/user/${post.owner}`}>
+                                   
                                     <Typography
                                         variant="h5"
                                         color={dark}
                                         fontWeight="250"
-                                        sx={{
-                                            "&:hover": {
-                                                color: palette.primary.light,
-                                                cursor: "pointer",
-                                            },
-                                        }}
+                                     
                                     >
                                         {post.firstname} {post.lastname}
                                     </Typography>
-                                    </Link>
+                                
                                     <Typography
                                         variant="h2"
                                         color={dark}
@@ -243,4 +239,4 @@ const Feed = (props) => {
     )
 }
 
-export default Feed
+export default Currentprofile

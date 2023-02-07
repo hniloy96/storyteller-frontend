@@ -1,11 +1,11 @@
 import { Box, Typography, Divider, useMediaQuery, useTheme, TextField, Button } from "@mui/material";
 import WidgetWrapper from "../Components/WidgetWrapper";
 import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { useSelector } from "react-redux";
 
 const Feed = (props) => {
-
+    const { id } = useParams()
     const { palette } = useTheme();
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const dark = palette.neutral.dark;
@@ -23,7 +23,7 @@ const Feed = (props) => {
         owner: `${_id}`
     })
     // api link
-    const BASE_URL = "http://localhost:4000/posts/"
+    const BASE_URL = `http://localhost:4000/user/posts/${id}`
     // getting all the posts
     const getPosts = async () => {
         try {
@@ -38,41 +38,6 @@ const Feed = (props) => {
             console.log(err)
         }
     }
-    // submitting and rendering new post
-    const handleSubmit = async (e) => {
-        e.preventDefault()
-        const currentState = { ...newForm }
-        try {
-            const requestOptions = {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`
-                },
-                body: JSON.stringify(currentState)
-            }
-            const response = await fetch(BASE_URL, requestOptions)
-            const createdPost = await response.json()
-            setPosts([...posts, createdPost])
-            setNewForm({
-                firstname: `${firstname}`,
-                lastname: `${lastname}`,
-                title: "",
-                description: "",
-                body: [],
-                owner: `${_id}`
-            })
-        } catch (err) {
-            console.log(err)
-        }
-
-    }
-
-    const handleChange = (e) => {
-        const userInput = { ...newForm }
-        userInput[e.target.name] = e.target.value
-        setNewForm(userInput)
-    }
 
     const loaded = () => {
         return (
@@ -84,21 +49,13 @@ const Feed = (props) => {
                             <WidgetWrapper margin="10px">
 
                                 <Box>
-                                    <Link className="link" key={post.owner} to={`/user/${post.owner}`}>
                                     <Typography
                                         variant="h5"
                                         color={dark}
                                         fontWeight="250"
-                                        sx={{
-                                            "&:hover": {
-                                                color: palette.primary.light,
-                                                cursor: "pointer",
-                                            },
-                                        }}
                                     >
                                         {post.firstname} {post.lastname}
                                     </Typography>
-                                    </Link>
                                     <Typography
                                         variant="h2"
                                         color={dark}
@@ -168,71 +125,6 @@ const Feed = (props) => {
     // rendering all the info
     return (
         <div className="page">
-            <div className="post">
-                <WidgetWrapper margin="10px">
-                    <form onSubmit={handleSubmit}>
-                    <Box
-            display="grid"
-            gap="30px"
-            gridTemplateColumns="repeat(4, minmax(0, 1fr))"
-            sx={{
-              "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
-            }}
-          >
-                        <TextField
-                            fullWidth
-                            type='text'
-                            id="title"
-                            name="title"
-                            placeholder="Provide a Title!"
-                            value={newForm.title}
-                            onChange={handleChange}
-                            required
-                            sx={{ gridColumn: "span 4" }}
-                        />
-                        <TextField
-                            fullWidth
-                            type='description'
-                            id="description"
-                            name="description"
-                            placeholder="Provide a simple Description"
-                            value={newForm.description}
-                            onChange={handleChange}
-                            required
-                            sx={{ gridColumn: "span 4" }}
-                        />
-                        <TextField
-                            fullWidth
-                            type='text'
-                            id="body"
-                            name="body"
-                            placeholder="Write away!"
-                            value={newForm.body}
-                            onChange={handleChange}
-                            required
-                            multiline
-                            rows={5}
-                            sx={{ gridColumn: "span 4" }}
-
-                           
-                            
-                        />
-                        <Button
-                            value="Create Post"
-                            type="submit"
-                            sx={{
-                                p: "1rem",
-                                gridColumn: "span 4",
-                                backgroundColor: palette.primary.main,
-                                color: palette.background.alt,
-                                "&:hover": { color: palette.primary.main },
-                            }}
-                        >Post your Story
-                        </Button>
-                        </Box>
-                    </form>
-                </WidgetWrapper>
-            </div>
             <div>
                 {posts && posts.length ? loaded() : loading()}
             </div>
