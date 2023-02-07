@@ -7,14 +7,11 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
-import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { Formik } from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setLogin } from "../state";
-import Dropzone from "react-dropzone";
-import FlexBetween from "../Components/FlexBetween";
 
 const registerSchema = yup.object().shape({
   firstname: yup.string().required("required"),
@@ -70,9 +67,7 @@ const Form = () => {
       },
     }
     const savedUserResponse = await fetch(
-      "http://localhost:4000/user/register",
-      configs
-    )
+      "http://localhost:4000/auth/register", configs )
     const savedUser = await savedUserResponse.json()
     onSubmitProps.resetForm();
 
@@ -88,7 +83,7 @@ const Form = () => {
   }
 
   const login = async (values, onSubmitProps) => {
-    const loggedInResponse = await fetch("http://localhost:4000/user/login", {
+    const loggedInResponse = await fetch("http://localhost:4000/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),

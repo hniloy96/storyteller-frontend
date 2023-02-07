@@ -5,8 +5,10 @@ import { useSelector } from 'react-redux';
 import { CssBaseline, ThemeProvider } from '@mui/material'
 import { themeSettings } from './theme';
 import { createTheme } from "@mui/material/styles";
-import HomePage from './scenes/homePage';
-import LoginPage from './scenes/LoginPage';
+import HomePage from './Pages/homePage';
+import LoginPage from './Pages/LoginPage';
+
+
 
 function App() {
   const mode = useSelector((state) => state.mode)
@@ -18,9 +20,9 @@ function App() {
       <ThemeProvider theme={theme} >
         <CssBaseline />
         <Routes>
-
           <Route path='/' element={< LoginPage />} />
           <Route path='/home' element={isAuth ? < HomePage /> : <Navigate to="/" />} />
+          
 
         </Routes>
       </ThemeProvider>

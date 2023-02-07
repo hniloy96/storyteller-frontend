@@ -8,3 +8,30 @@ body,
   width: 100%;
   font-family: "Rubik", sans-serif;
 }
+
+
+.link {
+  text-decoration: none;
+}
+
+/* .post {
+  display: grid;
+} */
+
+.title-box {
+  display: grid;
+  width: 400px;
+  margin: 10px;
+  
+}
+
+.post-box {
+  
+  width: 400px;
+  height: 200px;
+  margin: 10px;
+  
+
+
+  
+}
