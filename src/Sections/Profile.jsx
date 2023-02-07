@@ -5,13 +5,11 @@ import { Link } from "react-router-dom"
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom"
 
-const Feed = (props) => {
+const Feed = () => {
 
     const { palette } = useTheme();
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const dark = palette.neutral.dark;
-    const medium = palette.neutral.medium;
-    const main = palette.neutral.main;
     const token = useSelector((state) => state.token)
     const { _id, firstname, lastname } = useSelector((state) => state.user)
     const [posts, setPosts] = useState([])

@@ -1,33 +1,19 @@
-import {
-    ChatBubbleOutlineOutlined,
-    FavoriteBorderOutlined,
-    FavoriteOutlined,
-    ShareOutlined,
-  } from "@mui/icons-material";
 import { Box, Typography, Divider, useMediaQuery, useTheme, TextField, Button, IconButton } from "@mui/material";
 import { useState, useEffect } from "react"
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import { getUserToken } from "../utilities/authToken"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import WidgetWrapper from "../Components/WidgetWrapper";
 
 
 const Show = () => {
 
     const { palette } = useTheme();
-    const isNonMobile = useMediaQuery("(min-width:600px)");
     const dark = palette.neutral.dark;
-    const medium = palette.neutral.medium;
-    const main = palette.neutral.main;
-    const primary = palette.primary.main;
     const { id } = useParams()
-    const dispatch = useDispatch();
     const token = useSelector((state) => state.token)
     const { _id, firstname, lastname } = useSelector((state) => state.user)
-    const loggedInUserId = useSelector((state) => state.user._id)
     const [post, setPost] = useState(null)
     const [comments, setComments] = useState(null)
-    const isLiked = Boolean()
     const [loading, setLoading] = useState(true)
     const [newForm, setNewForm] = useState({
         firstname: `${firstname}`,

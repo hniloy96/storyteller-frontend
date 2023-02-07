@@ -3,20 +3,17 @@ import { Link } from "react-router-dom";
 import { useParams, useNavigate } from 'react-router-dom'
 import { useSelector } from "react-redux";
 import WidgetWrapper from "../Components/WidgetWrapper";
-import { Box, Typography, Divider, useMediaQuery, useTheme, TextField, Button, IconButton } from "@mui/material";
+import { Box, Typography, useMediaQuery, useTheme, TextField, Button, IconButton } from "@mui/material";
 import {
     Close,
   } from "@mui/icons-material";
 
-const Show = (props) => {
+const Show = () => {
 
     const token = useSelector((state) => state.token)
-    const { _id, firstname, lastname } = useSelector((state) => state.user)
     const [post, setPost] = useState(null)
     const { palette } = useTheme();
     const dark = palette.neutral.dark;
-    const medium = palette.neutral.medium;
-    const main = palette.neutral.main;
     const isNonMobile = useMediaQuery("(min-width:600px)");
     const [comments, setComments] = useState(null)
     const [loading, setLoading] = useState(true)

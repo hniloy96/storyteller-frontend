@@ -1,8 +1,6 @@
 import { Box, useMediaQuery } from "@mui/material";
 import { useSelector } from "react-redux";
 import Navbar from "../Sections/Navbar";
-import UserWidget from "../Sections/UserWidget";
-import Detailpost from "../Sections/Post-detail"
 import Updatepost from "../Sections/Post-update"
 import CurrentUser from "../Sections/Currentuser"
 

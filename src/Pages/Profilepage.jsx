@@ -10,7 +10,6 @@ import Currentprofile from "../Sections/Currentprofile";
 const HomePage = () => {
   const isNonMobileScreens = useMediaQuery("(min-width:1000px)");
   const { _id } = useSelector((state) => state.user);
-  const { id } = useParams()
   console.log(`the id is ${_id}`)
   
   return (

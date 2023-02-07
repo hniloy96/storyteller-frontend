@@ -1,9 +1,8 @@
 import {
-    ManageAccountsOutlined,
     AccountCircle,
     ContactMail
   } from "@mui/icons-material";
-  import { Box, Typography, Divider, useTheme } from "@mui/material";
+  import {Typography, Divider, useTheme } from "@mui/material";
   import FlexBetween from "../Components/FlexBetween";
   import WidgetWrapper from "../Components/WidgetWrapper";
   import { useSelector } from "react-redux";

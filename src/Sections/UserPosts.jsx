@@ -7,10 +7,7 @@ import { useSelector } from "react-redux";
 const Feed = (props) => {
     const { id } = useParams()
     const { palette } = useTheme();
-    const isNonMobile = useMediaQuery("(min-width:600px)");
     const dark = palette.neutral.dark;
-    const medium = palette.neutral.medium;
-    const main = palette.neutral.main;
     const token = useSelector((state) => state.token)
     const { _id, firstname, lastname } = useSelector((state) => state.user)
     const [posts, setPosts] = useState([])

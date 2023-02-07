@@ -1,24 +1,20 @@
 import {
-  ManageAccountsOutlined,
   AccountCircle,
   ContactMail
 } from "@mui/icons-material";
-import { Box, Typography, Divider, useTheme } from "@mui/material";
+import {Typography, Divider, useTheme } from "@mui/material";
 import FlexBetween from "../Components/FlexBetween";
 import WidgetWrapper from "../Components/WidgetWrapper";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom"
 
 const UserWidget = ({ userId }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const { palette } = useTheme();
-  const navigate = useNavigate();
   const token = useSelector((state) => state.token);
   const dark = palette.neutral.dark;
   const medium = palette.neutral.medium;
-  const main = palette.neutral.main;
   const BASE_URL = `http://localhost:4000/user/${userId}`
 
   const getUser = async () => {
