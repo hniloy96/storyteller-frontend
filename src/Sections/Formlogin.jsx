@@ -67,7 +67,7 @@ const Form = () => {
       },
     }
     const savedUserResponse = await fetch(
-      "http://localhost:4000/auth/register", configs )
+      "https://story-teller.herokuapp.com/auth/register", configs )
     const savedUser = await savedUserResponse.json()
     onSubmitProps.resetForm();
 
@@ -83,7 +83,7 @@ const Form = () => {
   }
 
   const login = async (values, onSubmitProps) => {
-    const loggedInResponse = await fetch("http://localhost:4000/auth/login", {
+    const loggedInResponse = await fetch("https://story-teller.herokuapp.com/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),

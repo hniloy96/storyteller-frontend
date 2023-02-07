@@ -7,7 +7,6 @@ import FlexBetween from "../Components/FlexBetween";
 import WidgetWrapper from "../Components/WidgetWrapper";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const UserWidget = ({ userId }) => {
   const [currentUser, setCurrentUser] = useState(null);
@@ -15,7 +14,7 @@ const UserWidget = ({ userId }) => {
   const token = useSelector((state) => state.token);
   const dark = palette.neutral.dark;
   const medium = palette.neutral.medium;
-  const BASE_URL = `http://localhost:4000/user/${userId}`
+  const BASE_URL = `https://story-teller.herokuapp.com/user/${userId}`
 
   const getUser = async () => {
     try {

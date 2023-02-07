@@ -24,8 +24,8 @@ const Show = () => {
 
     // this page follows a smililar structure to album-detail page except an extra delete function and edit panel. 
     const navigate = useNavigate()
-    const URL = `http://localhost:4000/posts/${id}`
-    const POST_URL = "http://localhost:4000/interactions/"
+    const URL = `https://story-teller.herokuapp.com/posts/${id}`
+    const POST_URL = "https://story-teller.herokuapp.com/interactions/"
 
     console.log(`Here is the token = ${token}`)
 

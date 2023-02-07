@@ -20,7 +20,7 @@ const Feed = (props) => {
         owner: `${_id}`
     })
     // api link
-    const BASE_URL = `http://localhost:4000/user/posts/${id}`
+    const BASE_URL = `https://story-teller.herokuapp.com/user/posts/${id}`
     // getting all the posts
     const getPosts = async () => {
         try {

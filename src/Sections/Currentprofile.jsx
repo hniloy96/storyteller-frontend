@@ -23,8 +23,8 @@ const Currentprofile = () => {
         owner: `${_id}`
     })
     // api link
-    const BASE_URL = `http://localhost:4000/user/posts/${_id}`
-    const Post_URL = "http://localhost:4000/posts"
+    const BASE_URL = `https://story-teller.herokuapp.com/user/posts/${_id}`
+    const Post_URL = "https://story-teller.herokuapp.com/posts"
     // getting all the posts
     const getPosts = async () => {
         try {

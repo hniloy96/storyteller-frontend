@@ -20,7 +20,7 @@ import {
     const dark = palette.neutral.dark;
     const medium = palette.neutral.medium;
     const main = palette.neutral.main;
-    const BASE_URL = `http://localhost:4000/user/${_id}`
+    const BASE_URL = `https://story-teller.herokuapp.com/user/${_id}`
   
     const getUser = async () => {
       try {

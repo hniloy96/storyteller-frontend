@@ -23,7 +23,7 @@ const Show = () => {
 
     const { id } = useParams()
     const navigate = useNavigate()
-    const URL = `http://localhost:4000/posts/${id}`
+    const URL = `https://story-teller.herokuapp.com/posts/${id}`
 
 
     const getPost = async () => {
